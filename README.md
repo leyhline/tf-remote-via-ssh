@@ -69,9 +69,19 @@ Fortunately, X11 is supported by the server. Now you can even stream graphical a
 TODO
 
 ## Configuration
-You need to edit `.ssh/config` (or create it if it doesn't exist yet).
+You need to edit `~/.ssh/config` (or create it if it doesn't exist yet).
 
-TODO
+```
+Host tf
+    HostName login.informatik.uni-freiburg.de
+    User <username>
+
+Host tfpool*
+    User <username>
+    ProxyCommand ssh -qax tf -W %h:%p
+```
+
+So, what does this do? The first section is a shortcut. Instead of `ssh <username>@login.informatik.uni-freiburg.de` you now just have to type `ssh tf`. The second section is also a shortcut for automatically accessing the pool computers without explicitly logging into the gateway beforehand. Just type e.g. `ssh tfpool42` and you're connected.
 
 ## Applications
 
